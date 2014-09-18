@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>Letter Counter</title>
+  
+  <script type='text/javascript' src='/js/lib/mootools-core-1.4.5-nocompat.js'></script>
+  
+  
+  
+  
+  <link rel="stylesheet" type="text/css" href="/css/result-light.css">
+  
+  <style type='text/css'>
+    
+  </style>
+  
+
+
+<script type='text/javascript'>//<![CDATA[ 
+
+function change(){
+    
+   var newInput = document.getElementById('myTextField').value;
+   if( newInput.length==0 ){
+       alert('Write Some real Text please.');
+   return;
+   }
+    
+    var input = document.getElementById('input');
+    input.innerHTML = "Your Input: " + newInput;
+    
+    newInput = newInput.toUpperCase();
+    var letterCount = Array.apply(null, new Array(26)).map(Number.prototype.valueOf,0);
+    var letterNum;
+    for(var i=0; i<newInput.length; i++){
+        letterNum = newInput.charCodeAt(i)-65
+        if(letterNum>=0 && letterNum <26){
+            letterCount[letterNum] ++;
+        }
+    }
+    
+    var letterContainer =  document.getElementById('letters');
+    var currentLetter;
+    
+    letterContainer.innerHTML = "";
+    for(var i = 0; i<letterCount.length; i++){
+        if(letterCount[i] != 0){
+            currentLetter = String.fromCharCode(65 + i);
+            letterContainer.innerHTML = letterContainer.innerHTML + ("<p>"+currentLetter+": "+letterCount[i]+"</p>");
+        }
+    }
+   
+   
+    
+}
+//]]>  
+
+</script>
+
+
+</head>
+<body>
+  <h1 id="title">Letter Counter</h1>
+<input type="text" id="myTextField"/>
+<input type="submit" id="byBtn" value="Count" onclick="change()"/>
+<p id="input"></p>
+<div id="letters"></div>
+  
+</body>
+
+
+</html>
+
+
