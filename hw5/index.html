@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html><head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>Letter Counter</title>
+  
+  <script type="text/javascript" src="index_files/mootools-core-1.js"></script>
+  
+  
+  
+  
+  <link rel="stylesheet" type="text/css" href="index_files/result-light.css">
+  
+   <style type="text/css">
+   body{
+   	background: url('./small_steps.png');
+   }
+   p{
+   	font-family: sans-serif;
+   }
+   #main{
+   	background: #EEEEEE;
+   	width: 50%;
+   	margin-top: 100px;
+   	margin-right: auto;
+   	margin-left: auto;
+   	padding: 10px;
+   	border: 2px solid;
+    	border-radius: 10px;
+    	border-color: #E65C00;
+   }
+   #title{
+   	font-family: sans-serif;
+   	color: #E65C00;
+   	margin: 0;
+   	margin-bottom: 10px;
+   }
+   .letterContainer{
+   	position: relative;
+   	margin: 0px;
+   	padding: 0;
+   	margin: 8px;
+   }
+   .letter{
+   	float: left;
+   	width: 20px;
+   	margin: 0;
+   }
+   .letterCount{
+   margin: 0;
+   }
+   
+   </style>
+  
+
+
+<script type="text/javascript">//<![CDATA[ 
+
+function change(){
+
+   var newInput = document.getElementById('myTextField').value;
+   if( newInput.length==0 ){
+      alert('Write Some real Text please.');
+   return;
+   }
+    
+    var input = document.getElementById('input');
+    input.innerHTML = "Your Input: " + newInput;
+    
+    newInput = newInput.toUpperCase();
+    var letterCount = Array.apply(null, new Array(26)).map(Number.prototype.valueOf,0);
+    var letterNum;
+    for(var i=0; i<newInput.length; i++){
+        letterNum = newInput.charCodeAt(i)-65
+        if(letterNum>=0 && letterNum <26){
+            letterCount[letterNum] ++;
+        }
+    }
+    
+    var letterContainer =  document.getElementById('letters');
+    var currentLetter;
+    
+    letterContainer.innerHTML = "";
+    for(var i = 0; i<letterCount.length; i++){
+        if(letterCount[i] != 0){
+            currentLetter = String.fromCharCode(65 + i);
+            letterContainer.innerHTML = letterContainer.innerHTML + ("<div class = 'letterContainer'><p class='letter'>"+currentLetter+"</p><p class='letterCount'>:  "+letterCount[i]+"</p></div>");
+        }
+    }
+   
+   
+    
+}
+//]]>  
+
+</script>
+
+
+</head>
+<body>
+
+	<div id="main">
+		<h1 id="title">Letter Counter</h1>
+		<input id="myTextField" type="text">
+		<input id="byBtn" value="Count" onclick="change()" type="submit">
+		<p id="input"></p>
+		<div id="letters"></div>
+	</div>
+
+
+</body></html>
